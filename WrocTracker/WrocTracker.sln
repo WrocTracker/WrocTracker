@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2013 for Web
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrocTracker", "WrocTracker\WrocTracker.csproj", "{0BCB9B26-43A3-43E0-8CF7-8812CD9825D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WrocTrackerClient", "WrocTrackerClient\WrocTrackerClient.csproj", "{67A31BE7-852C-406F-9FF1-857CEBDC9C3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{0BCB9B26-43A3-43E0-8CF7-8812CD9825D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0BCB9B26-43A3-43E0-8CF7-8812CD9825D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0BCB9B26-43A3-43E0-8CF7-8812CD9825D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67A31BE7-852C-406F-9FF1-857CEBDC9C3F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67A31BE7-852C-406F-9FF1-857CEBDC9C3F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67A31BE7-852C-406F-9FF1-857CEBDC9C3F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67A31BE7-852C-406F-9FF1-857CEBDC9C3F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
