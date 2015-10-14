@@ -18,33 +18,31 @@ namespace WrocTracker
         const string DataOpener = "busList%5B";
         const string DataPart2 = "%5D%5B%5D=";
 
-        public Tracker()
-        {
-            RefreshTime = new TimeSpan(0, 0, 0, DefaultRefreshtime);
-        }
-
-        public Tracker(int refreshTimeInSeconds)
+        public Tracker(int refreshTimeInSeconds = DefaultRefreshtime)
         {
             RefreshTime = new TimeSpan(0, 0, 0, refreshTimeInSeconds);
         }
 
-        public async Task<List<Vehicle>> GetPositions(string vehicle)
-        {
-            var postData = CreatePostData(vehicle);
-            return await GetVehicles(postData);
-        }
+        #region interfaceMember
 
-        public async Task<List<Vehicle>> GetPositions(string[] vehicles)
+        public async Task<List<Vehicle>> GetPositionsAsync(params string[] vehicles)
         {
+            if (vehicles == null)
+            {
+                throw new Exception("Vehicles list could not be empty.");
+            }
+
             var postData = CreatePostData(vehicles);
             return await GetVehicles(postData);
         }
 
-        private string CreatePostData(string name)
+        public List<Vehicle> GetPositions(params string[] vehicles)
         {
-            string type = VehicleHelper.GetVehicleType(name);
-            return DataOpener + type + DataPart2 + name;
+            var postData = CreatePostData(vehicles);
+            return Task.Run(async () => await GetVehicles(postData)).Result;
         }
+
+        #endregion
 
         private string CreatePostData(string[] names)
         {
@@ -52,7 +50,8 @@ namespace WrocTracker
 
             foreach (var name in names)
             {
-                sb.Append(CreatePostData(name));
+                var type = VehicleHelper.GetVehicleType(name);
+                sb.Append(DataOpener + type + DataPart2 + name);
                 sb.Append("&");
             }
 
@@ -63,12 +62,11 @@ namespace WrocTracker
         {
             var postResult = await PostAsync(postData);
             var mpkObjects = JsonConvert.DeserializeObject<List<MpkObject>>(postResult);
-            var vehicles =
-                mpkObjects.Select(mpkObject => new Vehicle(mpkObject))
+            var vehicles = mpkObjects.Select(mpkObject => new Vehicle(mpkObject))
                     .OrderBy(v => v.VehicleType)
                     .ThenBy(v => v.Name)
                     .ToList();
-            
+
             return vehicles;
         }
 
@@ -79,8 +77,8 @@ namespace WrocTracker
                 var uri = new Uri(Uri);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 httpClient.DefaultRequestHeaders.Host = uri.Host;
-                StringContent content = new StringContent(postData, Encoding.UTF8, "application/x-www-form-urlencoded");
-                var response  = await httpClient.PostAsync(uri, content);
+                var content = new StringContent(postData, Encoding.UTF8, "application/x-www-form-urlencoded");
+                var response = await httpClient.PostAsync(uri, content);
                 return await response.Content.ReadAsStringAsync();
             }
         }

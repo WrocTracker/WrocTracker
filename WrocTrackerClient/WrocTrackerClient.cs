@@ -11,9 +11,7 @@ namespace WrocTrackerClient
 
             while (Console.ReadKey().Key != ConsoleKey.Escape)
             {
-                string[] vehiclesToQuery = {"A", "C", "6"};
-
-                var vehicles = tracker.GetPositions(vehiclesToQuery).Result;
+                var vehicles = tracker.GetPositions("A", "C", "6", "2", "7", "11", "10", "4", "C", "D", "1", "245");
 
                 foreach (var vehicle in vehicles)
                 {
