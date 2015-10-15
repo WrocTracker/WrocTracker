@@ -23,8 +23,6 @@ namespace WrocTracker
             RefreshTime = new TimeSpan(0, 0, 0, refreshTimeInSeconds);
         }
 
-        #region interfaceMember
-
         public async Task<List<Vehicle>> GetPositionsAsync(params string[] vehicles)
         {
             if (vehicles == null)
@@ -38,11 +36,14 @@ namespace WrocTracker
 
         public List<Vehicle> GetPositions(params string[] vehicles)
         {
+            if (vehicles == null)
+            {
+                throw new Exception("Vehicles list could not be empty.");
+            }
+
             var postData = CreatePostData(vehicles);
             return Task.Run(async () => await GetVehicles(postData)).Result;
         }
-
-        #endregion
 
         private string CreatePostData(string[] names)
         {
