@@ -1,4 +1,4 @@
-﻿namespace WrocTracker
+﻿namespace WrocTracker.Enums
 {
     public enum VehicleType
     {

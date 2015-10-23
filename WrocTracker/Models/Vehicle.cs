@@ -1,6 +1,7 @@
 ﻿using System;
+using WrocTracker.Enums;
 
-namespace WrocTracker
+namespace WrocTracker.Models
 {
     public struct Vehicle
     {

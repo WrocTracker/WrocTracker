@@ -1,4 +1,4 @@
-﻿namespace WrocTracker
+﻿namespace WrocTracker.Models
 {
     public struct Position
     {
