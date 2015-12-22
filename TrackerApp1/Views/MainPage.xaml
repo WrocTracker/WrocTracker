@@ -1,0 +1,53 @@
+﻿<Page
+    x:Class="TrackerApp1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+    </Page.Resources>
+
+    <StackPanel>
+        <Grid Background="CadetBlue" Width="200" Height="200">
+            <Grid.RenderTransform>
+                <RotateTransform CenterX="100" CenterY="100" Angle="{Binding Angle}"/>
+            </Grid.RenderTransform>
+            <Line X1="100" Y1="0" X2="100" Y2="100" Stroke="Black"/>
+            <Ellipse StrokeThickness="10" Stroke="Black"/>
+
+            <ItemsControl ItemsSource="{Binding MPKses, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding MPKses.Left}"/>
+                        <Setter Property="Canvas.Top" Value="{Binding MPKses.Top}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Rectangle Width="10" Height="10" Stroke="Black" StrokeThickness="2" Fill="Brown"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+
+        <TextBlock Height="50" Text="{Binding TextBlockText1}"/>
+        <TextBlock Height="50" Text="{Binding TextBlockText2}"/>
+        <TextBlock Height="50" Text="{Binding TextBlockText3}"/>
+        <Button Command="{Binding ClickCommand}" Content="Click"></Button>
+        <TextBlock Height="50" Text="{Binding TextBlockText4}"/>
+    </StackPanel>
+</Page>

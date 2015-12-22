@@ -1,4 +1,4 @@
-﻿namespace WrocTracker
+﻿namespace TrackerForWindowsPhoneClassLibrary.Models
 {
     public struct MpkObject
     {

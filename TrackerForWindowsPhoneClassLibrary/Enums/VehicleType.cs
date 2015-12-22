@@ -1,4 +1,4 @@
-﻿namespace WrocTracker
+﻿namespace TrackerForWindowsPhoneClassLibrary.Enums
 {
     public enum VehicleType
     {
